@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161111202442) do
+ActiveRecord::Schema.define(version: 20161111185212) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "evenements", force: :cascade do |t|
     t.string   "adresse"
@@ -38,7 +41,7 @@ ActiveRecord::Schema.define(version: 20161111202442) do
     t.string   "encrypted_password"
     t.string   "salt"
     t.string   "tel"
-    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
   end
 
 end

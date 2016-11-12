@@ -1,5 +1,5 @@
 class CreateEvenements < ActiveRecord::Migration[5.0]
-  serialize :participants, Array
+
   def change
     create_table :evenements do |t|
       t.string :adresse
@@ -13,7 +13,6 @@ class CreateEvenements < ActiveRecord::Migration[5.0]
       t.float :longitude
       t.boolean :isPrivate
       t.integer :userId
-      t.integer :participants, default: [].to_yaml
       t.timestamps
     end
   end
