@@ -1,0 +1,14 @@
+  <h1>Mes événements</h1>
+  <div class="list-group col-xs-offset-3"  >
+    <% @events.each do |event| %>
+            <% if event.userId == current_user.id %>
+                <%= link_to event, class: "list-group-item col-xs-8" do %>
+                <span class="glyphicon glyphicon-map-marker"></span>
+                <% if event.isPrivate %>
+                  <%= "[PRIVATE]"%>
+                <% end %>
+                <%=event.numero.to_s + " " + event.route + " - " + event.ville %>
+            <%end%>
+        <% end %>
+    <% end %>
+  </div>

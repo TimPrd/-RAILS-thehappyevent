@@ -1,0 +1,131 @@
+
+<script type="text/javascript">
+  var map;
+  function initMap() {
+    var mapOptions = {
+      center: {lat: <%= @eactual.latitude %>, lng: <%= @eactual.longitude %>},
+      zoom: 15
+    };
+
+    map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+    addMarker(<%= @eactual.latitude %>, <%= @eactual.longitude %> );
+
+
+    function addMarker(lat, lng) {
+      var marker = new google.maps.Marker({
+        position: new google.maps.LatLng(lat, lng),
+        map: map,
+        title: 'foo'
+      });
+    }
+
+  }
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBec10Y1_D_kZvAzf6QI60NHQsAJvSUNR0&callback=initMap">
+</script>
+ numero : <%= @eactual.numero %>
+participant : <%= @eactual.participants %>
+
+
+<%if @ebool==false%>
+
+    <%=form_tag url_for(:controller => 'evenements', :action => 'show'), :method => 'get' do %>
+        <%= label_tag "Clef de l'événement : "%>
+        <%= text_field_tag :verifpass %>
+        <%= submit_tag "Envoyer" %>
+    <% end %>
+
+    <%if @pwd==@eactual.pwd%>
+        <%@ebool=true%>
+    <%end%>
+<%end%>
+
+<%if @ebool%>
+    <!-- /.row -->
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <div class="row">
+                <div class="col-xs-3">
+                  <i class="fa fa-comments fa-5x"></i>
+                </div>
+                <div class="col-xs-6 text-center">
+                  <div>Créé par : </div>
+                  <div><%= @createur %></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 ">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <div class="row">
+                <div class="col-xs-3">
+                  <i class="fa fa-comments fa-5x"></i>
+                </div>
+                <div class="col-xs-12 text-center">
+                  <div>Lieu : </div>
+                  <div><%= @eactual.address%></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 ">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <div class="row">
+                <div class="col-xs-3">
+                  <i class="fa fa-comments fa-5x"></i>
+                </div>
+                <div class="col-xs-6 text-center">
+                  <div>Date :</div>
+                  <div><%= @eactual.datee.strftime("%d-%m-%Y") %></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <div class="col-xs-12 col-centered">
+      <div id="map"></div>
+    </div>
+
+
+      <div class="row">
+        <div class="col-lg-4">
+          List
+          </div>
+
+        <div class="col-lg-4">
+          Donut
+        </div>
+
+        <div class="col-lg-4">
+          Note
+        </div>
+    </div>
+
+
+      <div class="col-xs-12 col-centered">
+        <div id="chat">
+          chat
+        </div>
+      </div>
+    </div>
+
+    <!-- /.row -->
+    <%@e =["timpardieu@aol.com", "wolf@blabla.com", "tavege@egfe.com"]%>
+
+    <a href="mailto:<%=@e[0]%>,<%=@e[1]%>">Clique ici pour m'envoyer un e-mail</a>
+
+
+
+
+<%end%>
+

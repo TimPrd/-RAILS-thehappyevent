@@ -1,0 +1,55 @@
+
+
+
+
+  <div class="col-xs-6 col-centered">
+    <div id="map"></div>
+  </div>
+
+  <input name="loc" class="col-xs-4 row-centered" type="text"  placeholder="Location">
+
+  <div class="list-group col-xs-5 col-centered" style="overflow: hidden" >
+    <% @events.each do |event| %>
+        <% if !event.isPrivate %>
+            <%= link_to event , class: "list-group-item" do %>
+                <span class="glyphicon glyphicon-map-marker"></span>
+                <%=event.numero.to_s + " " + event.route + " - " + event.ville + event.userId.to_s + event.isPrivate.to_s + current_user.id.to_s%>
+            <%end%>
+        <% end %>
+    <% end %>
+
+  </div>
+
+
+
+
+
+<script type="text/javascript">
+  var map;
+  function initMap() {
+    var mapOptions = {
+      center: {lat: <%= @efirst.latitude %>, lng: <%= @efirst.longitude %>},
+      zoom: 15
+    };
+
+    map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+    <% @events.each do |event| %>
+    addMarker(<%= event.latitude %>, <%= event.longitude %> );
+    <% end %>
+
+
+    function addMarker(lat, lng) {
+      var marker = new google.maps.Marker({
+        position: new google.maps.LatLng(lat, lng),
+        map: map,
+        title: 'foo'
+      });
+    }
+
+  }
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBec10Y1_D_kZvAzf6QI60NHQsAJvSUNR0&callback=initMap">
+</script>
+

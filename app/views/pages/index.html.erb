@@ -1,0 +1,67 @@
+<div class="jumbotron">
+
+  <div class="container">
+    <%= link_to '#map' , class: "btn btn-block btn-primary" do %>
+        <i class="glyphicon glyphicon-chevron-down"></i>
+        <%="Voir la carte des événements"%>
+    <% end %>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+<br>
+<div class="col-lg-7 ">
+  <div id="map"></div>
+</div>
+
+<input id="loc_search" name="loc" class="col-lg-4 col-xs-12 row-centered" type="text"  placeholder="Location">
+
+<div class="list-group col-lg-5 col-centered" >
+  <% @events.each do |event| %>
+      <% if !event.isPrivate %>
+          <%= link_to event , class: "list-group-item" do %>
+              <span class="glyphicon glyphicon-map-marker"></span>
+              <%=event.numero.to_s + " " + event.route + " - " + event.ville %>
+          <%end%>
+      <% end %>
+  <% end %>
+
+</div>
+</div>
+
+<script type="text/javascript">
+  var map;
+  function initMap()
+  {
+    var mapOptions = {
+      center: {lat: <%= @efirst.latitude %>, lng: <%= @efirst.longitude %>},
+      zoom: 15
+    };
+
+    map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+    <% @events.each do |event| %>
+      <%if !event.isPrivate %>
+        addMarker(<%= event.latitude %>, <%= event.longitude %> );
+      <% end %>
+    <% end %>
+
+    function addMarker(lat, lng) {
+      var marker = new google.maps.Marker({
+        position: new google.maps.LatLng(lat, lng),
+        map: map,
+        title: 'foo'
+      });
+    }
+
+  }
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBec10Y1_D_kZvAzf6QI60NHQsAJvSUNR0&callback=initMap">
+</script>

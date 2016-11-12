@@ -1,0 +1,67 @@
+<h1>Evenements#new</h1>
+<!--@ERROR : ne pas laisser ça ici | AutoCompletition folder => app/assets/javascripts/ -->
+
+<%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?libraries=places&amp;key=AIzaSyADnjswsf-9ThrxZBvqsiCuha2p1k1kc0c" %>
+
+<%= javascript_include_tag "app/assets/javascripts/autoComplete" %>
+<div class="col-lg-12">
+<div id="addE" onmouseover="initializeAutocomplete('user_input_autocomplete_address')"> <!--touchenter-->
+<%= form_for(@evenement) do |f| %>
+
+    <div class="form-group col-lg-12">
+      <%= f.label :adresse, "Adresse" %><br />
+      <%= f.text_field :adresse, :id => "user_input_autocomplete_address", :placeholder => "Adresse du lieu" , :class => "col-lg-12"  %>
+    </div>
+      <p>Ou remplissez ces champs : </p>
+    <div class="form-group">
+      <%= f.label :numero, "Numéro" %><br />
+      <%= f.text_field :numero, :id => "street_number"%>
+    </div>
+    <div class="form-group">
+      <%= f.label :route, "Nom de la rue" %><br />
+      <%= f.text_field :route, :id => "route"%>
+    </div>
+    <div class="form-group">
+      <%= f.label :zipCode , "Code postal" %><br />
+      <%= f.text_field :zipCode, :id => "postal_code"%>
+    </div>
+    <div class="form-group">
+      <%= f.label :ville, "Ville" %><br />
+      <%= f.text_field :ville, :id => "locality"%>
+    </div>
+    <div class="form-group">
+      <%= f.label :pays, "Pays" %><br />
+      <%= f.text_field :pays, :id => "country"%>
+    </div>
+    <hr>
+    <div class="form-group">
+      <%= f.label :latitude, "Latitude" %><br />
+      <%= f.text_field :latitude, :id => "latitude", :readonly => true%>
+    </div>
+    <div class="form-group">
+      <%= f.label :longitude, "Longitude" %><br />
+      <%= f.text_field :longitude, :id => "longitude", :readonly => true%>
+    </div>
+      <div class="form-group">
+        <%= f.label :datee, "Date" %><br />
+        <%= f.text_field :datee, :id => "datepicker1", :data => {:provide => 'datepicker','date-format' => 'dd-mm-yyyy', 'date-autoclose' => 'true'} %>
+      </div>
+
+    <div class="form-group">
+      <%= f.label :isPrivate,"L'évenement est privé" %>
+      <%= f.check_box :isPrivate %>
+    </div>
+
+
+
+    <div class="actions">
+      <%= f.submit "Ajouter" %>
+    </div>
+<% end %>
+
+
+
+
+</div>
+
+</div>

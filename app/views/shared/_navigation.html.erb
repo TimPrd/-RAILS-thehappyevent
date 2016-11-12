@@ -1,0 +1,22 @@
+<nav class="navbar navbar-default " role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <ul class="nav nav-tabs">
+
+        <li role="presentation" class="active"> <%= link_to "Accueil", index_path %></li>
+        <% if signed_in? %>
+          <li role="presentation">               <%= link_to "Profil", current_user %>  </li>
+          <li role="presentation">               <%= link_to "Déconnexion", signout_path %> </li>
+          <li role="presentation">               <%= link_to "Messagerie", message_path %></li>
+
+          <!--<li role="presentation">               <a <\%= link_to "Editer", edition_path(current_user) %></a></li>-->
+
+        <% else %>
+          <li role="presentation">               <%= link_to "S'identifier", signin_path %></li>
+          <li role="presentation">               <%= link_to "S'inscrire", signup_path %></li>
+
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>
