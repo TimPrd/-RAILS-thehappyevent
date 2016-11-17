@@ -25,8 +25,6 @@
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBec10Y1_D_kZvAzf6QI60NHQsAJvSUNR0&callback=initMap">
 </script>
- numero : <%= @eactual.numero %>
-participant : <%= @eactual.participants %>
 
 
 <%if @ebool==false%>
@@ -43,7 +41,6 @@ participant : <%= @eactual.participants %>
 <%end%>
 
 <%if @ebool%>
-    <!-- /.row -->
     <div class="container">
       <div class="row">
         <div class="col-lg-4">
@@ -55,7 +52,7 @@ participant : <%= @eactual.participants %>
                 </div>
                 <div class="col-xs-6 text-center">
                   <div>Créé par : </div>
-                  <div><%= @createur %></div>
+                  <div><%= @createur.upcase %></div>
                 </div>
               </div>
             </div>
@@ -92,15 +89,59 @@ participant : <%= @eactual.participants %>
           </div>
         </div>
       </div>
-    <div class="col-xs-12 col-centered">
-      <div id="map"></div>
+
+
+
+
+
+
+      <div class="row ">
+        <div class="col-lg-4">
+          <%= form_for :participant, :url  => { :controller => "participants", :action => "create", :evenementId => @eactual.id, :status => "participe" } do |f| %>
+              <div class="form-group">
+                <%= f.button :class => "btn btn-block btn-primary" do%>
+                    <i class="glyphicon glyphicon-ok-sign"></i> Je participe
+                <%end%>
+              </div>
+          <%end%>
+
+        </div>
+        <div class="col-lg-4">
+          <%= form_for :participant, :url  => { :controller => "participants", :action => "create", :evenementId => @eactual.id, :status => "refus" } do |f| %>
+              <div class="form-group">
+                <%= f.button :class => "btn btn-block btn-primary" do%>
+                    <i class="glyphicon glyphicon-remove-sign"></i> Je ne participe pas
+                <%end%>
+              </div>
+          <%end%>
+
+        </div>
+      <div class="col-lg-4">
+        <%= form_for :participant, :url  => { :controller => "participants", :action => "create", :evenementId => @eactual.id, :status => "?" } do |f| %>
+            <div class="form-group">
+              <%= f.button :class => "btn btn-block btn-primary" do%>
+                  <i class="glyphicon glyphicon-question-sign"></i> Je ne sais pas
+              <%end%>
+            </div>
+        <%end%>
+      </div>
+
+
+
     </div>
+
+      <div class="col-xs-12 col-centered">
+        <div id="map"></div>
+      </div>
+
+
+
 
 
       <div class="row">
         <div class="col-lg-4">
           List
-          </div>
+        </div>
 
         <div class="col-lg-4">
           Donut
@@ -112,20 +153,107 @@ participant : <%= @eactual.participants %>
     </div>
 
 
-      <div class="col-xs-12 col-centered">
-        <div id="chat">
-          chat
+      <div class="row ">
+
+        <!-- Participants  -->
+        <div class="col-lg-4">
+          <h2>Participants</h2>
+          <table class="table center-block">
+            <thead>
+            <tr>
+              <th>Invités </th>
+              <th>Statut  </th>
+            </tr>
+            </thead>
+            <tbody>
+            <%@participant.each do |p| %>
+              <tr>
+                <td><%= User.find(p.userId).nom %></td>
+                <td><i class="glyphicon glyphicon-ok-sign "></i></td>
+              </tr>
+            <% end%>
+            </tbody>
+          </table>
         </div>
+
+        <!-- Refus  -->
+        <div class="col-lg-4">
+          <h2>Refus</h2>
+          <table class="table center-block">
+            <thead>
+            <tr>
+              <th>Invités </th>
+              <th>Statut  </th>
+            </tr>
+            </thead>
+            <tbody>
+            <%@noparticipant.each do |p| %>
+                <tr>
+                  <td><%= User.find(p.userId).nom %></td>
+                  <td><i class="glyphicon glyphicon-remove-sign "></i></td>
+                </tr>
+            <% end%>
+            </tbody>
+          </table>
+        </div>
+
+
+        <!-- Ne sais pas  -->
+        <div class="col-lg-4">
+          <h2>Indécis  </h2>
+          <table class="table center-block">
+            <thead>
+            <tr>
+              <th>Invités </th>
+              <th>Statut  </th>
+            </tr>
+            </thead>
+            <tbody>
+            <%@mbparticipant.each do |p| %>
+                <tr>
+                  <td><%= User.find(p.userId).nom %></td>
+                  <td><i class="glyphicon glyphicon-question-sign "></i></td>
+                </tr>
+            <% end%>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+
+
+
+
+    <div class="col-xs-12 col-centered">
+      <div id="envoieMsg">
+      </div>
       </div>
     </div>
 
     <!-- /.row -->
-    <%@e =["timpardieu@aol.com", "wolf@blabla.com", "tavege@egfe.com"]%>
 
-    <a href="mailto:<%=@e[0]%>,<%=@e[1]%>">Clique ici pour m'envoyer un e-mail</a>
+  <script type="text/javascript">
+      if (screen.width <= 850)
+      {
+        document.getElementById('envoieMsg').innerHTML = "<a href=\"smsto:<%=@listtel%>?body=Vous êtes participant à l'événement de : <%=@createur%> .  RDV le <%=@eactual.datee%> au <%=@eactual.address%> \">Clique ici pour envoyer un sms aux participants</a>";
+      }
+      else
+      {
+        document.getElementById('envoieMsg').innerHTML = "<a href=\"mailto:<%=@listmel%>?subject=Evenement prévu&body=Vous êtes participant à l'événement de : <%=@createur%> .  RDV le <%=@eactual.datee%> au <%=@eactual.address%> \">Clique ici pour envoyer un e-mail aux participants </a>";
+      }
+  </script>
 
 
 
-
+    <div class="col-xs-12 col-centered">
+      <div id="chat">
+        chat
+      </div>
+    </div>
+    </div>
 <%end%>
-

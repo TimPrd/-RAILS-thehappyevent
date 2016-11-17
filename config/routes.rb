@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :users
   resources :sessions, :only => [:new, :create, :destroy]
   resources :evenements
+  resources :participants
 
   root 'pages#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
@@ -24,6 +25,7 @@ Rails.application.routes.draw do
   get 'users/new'
 
   get 'evenements/show'
+  get 'evenements/admis'
 
 
   get 'sessions/new'
