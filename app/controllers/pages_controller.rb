@@ -6,4 +6,8 @@ class PagesController < ApplicationController
     @logV = request.location.longitude
 
   end
+
+  def index
+
+  end
 end
