@@ -4,6 +4,6 @@ class PagesController < ApplicationController
     @e =   request.remote_ip
 
     @location = Geokit::Geocoders::IpGeocoder.geocode(@e)
-    @city = location.city
+    @city = @location.city
   end
 end
