@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
   def index
     @events = Evenement.all
-    location =   request.location
+    location =   request.remote_ip
     @latV = request.location.latitude
     @logV = request.location.longitude
 
