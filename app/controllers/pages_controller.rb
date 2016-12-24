@@ -8,6 +8,7 @@ class PagesController < ApplicationController
   end
 
   def index
+    @events = Evenement.all
 
   end
 end
