@@ -17,10 +17,7 @@ Rails.application.routes.draw do
 
 
 
-  get 'mycity'   => 'pages#myCity'
 
-
-  get '/around'   => 'pages#myCity'
   get '/myEvents' => 'evenements#show_my_events'
   get '/allEvents' => 'evenements#show_all_events'
   get '/addEvent' => 'evenements#new'
