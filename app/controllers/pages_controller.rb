@@ -1,8 +1,7 @@
 class PagesController < ApplicationController
   def index
     @events = Evenement.all
-    @e =   request.remote_ip
-    @city = Geocoder.search(@e).city
-
+    location =   request.remote_ip
+    @city = request.location.city
   end
 end
