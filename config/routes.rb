@@ -14,7 +14,9 @@ Rails.application.routes.draw do
   get '/signup' => 'users#new'
   get '/signin' => 'sessions#new'
   get '/signout' => 'sessions#destroy'
-  get '/message'=> 'pages#messagerie'
+  get 'mycity'   => 'pages#myCity'
+
+
 
   get '/myEvents' => 'evenements#show_my_events'
   get '/allEvents' => 'evenements#show_all_events'

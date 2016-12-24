@@ -1,5 +1,8 @@
 require 'digest'
 class User < ActiveRecord::Base
+
+
+
   attr_accessor :password
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
 
