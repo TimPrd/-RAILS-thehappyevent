@@ -1,7 +1,6 @@
 class PagesController < ApplicationController
   def index
     @events = Evenement.all
-    @efirst = Evenement.first
+    @e =   request.remote_ip
   end
-
 end

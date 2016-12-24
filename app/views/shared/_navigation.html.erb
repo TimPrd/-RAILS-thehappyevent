@@ -1,35 +1,38 @@
 
-<div class="navbar navbar-default">
-  <div class="navbar-header">
-    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-    </button>
-  </div>
 
-  <div class="navbar-collapse collapse">
-    <ul class="nav navbar-nav pull-left">
-      <li > <%= link_to "Accueil", index_path %></li>
-      <% if signed_in? %>
-          <li >               <%= link_to "Profil", current_user %>  </li>
-          <li >               <%= link_to "Mes événements", myEvents_path %>  </li>
-          <li >               <%= link_to "Tout les événements", allEvents_path %>  </li>
+  <div class="navbar navbar-default">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
 
-          <li >               <%= link_to "Déconnexion", signout_path %> </li>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav pull-left">
+        <li > <%= link_to "Accueil", index_path %></li>
+        <% if signed_in? %>
+            <li >               <%= link_to "Mes événements", myEvents_path %>  </li>
+            <li >               <%= link_to "Tout les événements", allEvents_path %>  </li>
 
-          <!--<li role="presentation">               <a <\%= link_to "Editer", edition_path(current_user) %></a></li>-->
-
-      <% else %>
-          <li >               <%= link_to "S'identifier", signin_path %></li>
-          <li >               <%= link_to "S'inscrire", signup_path %></li>
-
-      <% end %>
-    </ul>
+            <li >               <%= link_to "Dans ma ville" %>  </li>
+            <li >               <%= link_to "Thermographie"  %>  </li>
 
 
+            <li >               <%= link_to "Mon compte", current_user %>  </li>
+            <li >               <%= link_to "Déconnexion", signout_path %> </li>
 
-  </div><!--/.nav-collapse -->
+            <!--<li role="presentation">               <a <\%= link_to "Editer", edition_path(current_user) %></a></li>-->
 
-</div><!--/.navbar -->
+        <% else %>
+            <li >               <%= link_to "S'identifier", signin_path %></li>
+            <li >               <%= link_to "S'inscrire", signup_path %></li>
+
+        <% end %>
+      </ul>
+
+    </div><!--/.nav-collapse -->
+
+  </div><!--/.navbar -->
 

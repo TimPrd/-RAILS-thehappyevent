@@ -80,7 +80,7 @@ class EvenementsController < ApplicationController
 
 
     if @evenement.isPrivate
-      @evenement.pwd = SecureRandom.hex(8)
+      @evenement.pwd = SecureRandom.hex(6)
 
 
     end

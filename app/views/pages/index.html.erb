@@ -1,5 +1,5 @@
 <div class="jumbotron">
-
+<%=@e%>
   <div class="container">
     <%= link_to '#map' , class: "btn btn-block btn-primary" do %>
         <i class="glyphicon glyphicon-chevron-down"></i>
@@ -40,8 +40,9 @@
   function initMap()
   {
     var mapOptions = {
-      center: {lat: <%= @efirst.latitude %>, lng: <%= @efirst.longitude %>},
-      zoom: 15
+      center: {lat: 47, lng: 1.8},
+      zoom: 6
+
     };
 
     map = new google.maps.Map(document.getElementById('map'), mapOptions);
