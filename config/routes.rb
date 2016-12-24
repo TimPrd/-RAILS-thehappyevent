@@ -14,10 +14,10 @@ Rails.application.routes.draw do
   get '/signup' => 'users#new'
   get '/signin' => 'sessions#new'
   get '/signout' => 'sessions#destroy'
-  get 'mycity'   => 'pages#myCity'
 
 
 
+  get '/auround'   => 'pages#myCity'
   get '/myEvents' => 'evenements#show_my_events'
   get '/allEvents' => 'evenements#show_all_events'
   get '/addEvent' => 'evenements#new'
