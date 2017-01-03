@@ -1,7 +1,12 @@
 // Place all the styles related to the Evenements controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.jumbotron h1
+.jumbotron h1, p
 {
   color : white;
+}
+
+.jumbotron
+{
+  background-color : #6B0C28;
 }

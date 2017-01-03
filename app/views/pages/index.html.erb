@@ -1,6 +1,11 @@
-<div class="jumbotron">
+<div class="jumbotron text-center">
   <h1>The Happy Event</h1>
+  <h2>Organiser vos événements privés ou publics et découvrer ce qui se prépare autour de vous !  </h2>
   <div class="container">
+    <%= form_tag(posts_path, :method => "get", id: "search-form") do %>
+        <%= text_field_tag :search, params[:search], placeholder: "Rechercher un lieu" %>
+        <%= submit_tag "Rechercher" %>
+    <% end %>
     <%= link_to '#map' , class: "btn btn-block btn-primary" do %>
         <i class="glyphicon glyphicon-chevron-down"></i>
         <%="Voir la carte des événements"%>
