@@ -1,12 +1,9 @@
-<div class="jumbotron text-center">
-  <h1>The Happy Event</h1>
+<div class=" jumbotron text-center">
+  <h1>The Happy Event</h1><br>
   <h2>Organisez vos événements privés ou publics et découvrez ce qui se prépare autour de vous !  </h2>
   <div class="container">
-    <%= form_tag(pages_path, :method => "get", id: "search-form") do %>
-        <%= text_field_tag :search, params[:search], placeholder: "Rechercher un lieu" %>
-        <%= submit_tag "Rechercher" %>
-    <% end %>
-    <%= link_to '#map' , class: "btn btn-block btn-primary" do %>
+
+    <%= link_to 'allEvents' , class: "btn btn-block btn-primary" do %>
         <i class="glyphicon glyphicon-chevron-down"></i>
         <%="Voir la carte des événements"%>
     <% end %>
@@ -25,10 +22,17 @@
   <div id="map"></div>
 </div>
 
-<input id="loc_search" name="loc" class="col-lg-4 col-xs-12 row-centered" type="text"  placeholder="Location">
+<%= form_tag(pages_path, :method => "get", id: "search-form", class: "col-lg-4 col-xs-12 row-centered") do %>
+    <%= text_field_tag :search, params[:search], placeholder: "Rechercher un lieu" %>
+    <%= submit_tag "Rechercher" %>
+<% end %>
+<% if @events.nil? %>
+    <h4>There are no recipes containing the term <%= params[:search] %>.</h4>
+<% end %>
+
 
 <div class="list-group col-lg-5 col-centered" >
-  <% @events.each do |event| %>
+  <% @evenements.each do |event| %>
       <% if !event.isPrivate %>
           <%= link_to event , class: "list-group-item" do %>
               <span class="glyphicon glyphicon-map-marker"></span>
@@ -52,7 +56,7 @@
 
     map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
-    <% @events.each do |event| %>
+    <% @evenements.each do |event| %>
       <%if !event.isPrivate %>
         addMarker(<%= event.latitude %>, <%= event.longitude %> );
       <% end %>

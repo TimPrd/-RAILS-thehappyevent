@@ -13,7 +13,7 @@
         <% if !event.isPrivate %>
             <%= link_to event , class: "list-group-item" do %>
                 <span class="glyphicon glyphicon-map-marker"></span>
-                <%=event.numero.to_s + " " + event.route + " - " + event.ville + event.userId.to_s + event.isPrivate.to_s + current_user.id.to_s%>
+                <%=event.address%>
             <%end%>
         <% end %>
     <% end %>
@@ -28,8 +28,8 @@
   var map;
   function initMap() {
     var mapOptions = {
-      center: {lat: <%= @efirst.latitude %>, lng: <%= @efirst.longitude %>},
-      zoom: 15
+      center: {lat:47, lng: 1.8},
+      zoom: 6
     };
 
     map = new google.maps.Map(document.getElementById('map'), mapOptions);
