@@ -7,10 +7,7 @@ class Evenement < ApplicationRecord
 
   # Note that if you used attr_accessible, and all other fields cannot be assigned through User.new(params[:user[), while if you used attr_protected, only those fields cannot assigned.
   def self.search(search)
-    where("address ILIKE ?", "%#{search}%")
-    where("ville ILIKE ?", "%#{search}%")
-    where("datee ILIKE ?", "%#{search}%")
-
+    where("lower (route)  ILIKE ? OR lower(ville) ILIKE ? or lower(address) ILIKE ? or lower(pays) ILIKE ?", "%#{search.downcase}%", "%#{search.downcase}%", "%#{search.downcase}%", "%#{search.downcase}%")
   end
 
 

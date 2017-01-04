@@ -68,7 +68,7 @@ class EvenementsController < ApplicationController
     @evenement.zipCode    = params[:evenement][:zipCode]
     @evenement.ville      = params[:evenement][:ville]
     @evenement.pays       = params[:evenement][:pays]
-    @evenement.address    = " "+@evenement.numero.to_s + " " + @evenement.route.to_s + " - " + @evenement.ville.to_s + " " + @evenement.zipCode.to_s
+    @evenement.address    = @evenement.numero.to_s + " " + @evenement.route.to_s + " " + @evenement.ville.to_s + " " + @evenement.zipCode.to_s
 
 
     @elonlat = Geocoder.search(@evenement.address)

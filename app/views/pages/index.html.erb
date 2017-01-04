@@ -2,11 +2,28 @@
   <h1>The Happy Event</h1><br>
   <h2>Organisez vos événements privés ou publics et découvrez ce qui se prépare autour de vous !  </h2>
   <div class="container">
+    <%= form_tag(pages_path, :method => "get", id: "search-form" ) do %>
+        <%= text_field_tag :search, params[:search], placeholder: "Rechercher une ville, une adresse, un pays...",class: "col-md-10 col-xs-12 row-centered" %>
+        <%= submit_tag "Rechercher" , class: "col-lg-2 col-xs-12 row-centered"%>
+    <% end %>
+    <div class="recherche col-lg-12 col-xs-12 ">
+    <% if @events.present? %>
+        <% @events.each do |e| %>
+            <%=  link_to e , class: "list-group-item" do %>
+                  <span class="glyphicon glyphicon-map-marker"></span>
+                  <%=e.address %>
+              <%end%>
+    <%end%>
 
+    <% else %>
+        <p>Aucun résultat pour : <%= params[:search] %>.</p>
+    <% end %>
     <%= link_to 'allEvents' , class: "btn btn-block btn-primary" do %>
         <i class="glyphicon glyphicon-chevron-down"></i>
         <%="Voir la carte des événements"%>
     <% end %>
+    </div>
+
   </div>
 </div>
 
@@ -22,13 +39,7 @@
   <div id="map"></div>
 </div>
 
-<%= form_tag(pages_path, :method => "get", id: "search-form", class: "col-lg-4 col-xs-12 row-centered") do %>
-    <%= text_field_tag :search, params[:search], placeholder: "Rechercher un lieu" %>
-    <%= submit_tag "Rechercher" %>
-<% end %>
-<% if @events.nil? %>
-    <h4>There are no recipes containing the term <%= params[:search] %>.</h4>
-<% end %>
+
 
 
 <div class="list-group col-lg-5 col-centered" >
@@ -36,7 +47,7 @@
       <% if !event.isPrivate %>
           <%= link_to event , class: "list-group-item" do %>
               <span class="glyphicon glyphicon-map-marker"></span>
-              <%=event.numero.to_s + " " + event.route + " - " + event.ville %>
+              <%=event.address %>
           <%end%>
       <% end %>
   <% end %>
